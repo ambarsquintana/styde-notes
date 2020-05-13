@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('notas', function () {
+    return 'Aquí estará el listado para crear notas';
+});
+
+Route::get('notas/crear', function () {
+    return 'Aquí estará el formulario para crear notas';
 });
