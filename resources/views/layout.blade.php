@@ -13,14 +13,14 @@
 
         <nav class="main-nav">
             <ul class="main-nav-list">
-                <li class="main-nav-item {{ url()->current() == url('/') ? 'active' : '' }}">
-                    <a href="{{ url('/') }}" class="main-nav-link">
+                <li class="main-nav-item {{ url()->current() == route('notes') ? 'active' : '' }}">
+                    <a href="{{ route('notes') }}" class="main-nav-link">
                         <i class="icon icon-th-list"></i>
                         <span>Ver notas</span>
                     </a>
                 </li>
-                <li class="main-nav-item {{ url()->current() == url('notas/crear') ? 'active' : '' }} ">
-                    <a href="{{ url('notas/crear') }}" class="main-nav-link">
+                <li class="main-nav-item {{ url()->current() == route('notes.create') ? 'active' : '' }} ">
+                    <a href="{{ route('notes.create') }}" class="main-nav-link">
                         <i class="icon icon-pen"></i>
                         <span>Nueva nota</span>
                     </a>
