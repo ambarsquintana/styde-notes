@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('notas', function () {
-    return 'Aquí estará el listado para crear notas';
+Route::get('/', function () {
+    return view('notes');
 });
 
 Route::get('notas/crear', function () {
-    return 'Aquí estará el formulario para crear notas';
+    return view('add-note');
 });
 
 Route::get('notas/{id}', function ($id) {
