@@ -30,25 +30,31 @@
     </header>
     <main class="content">
         <div class="cards">
-            <div class="card card-small">
-                <div class="card-body">
-                    <h4>¿Para qué sirve Composer?</h4>
 
-                    <p>
-                        Con Composer podemos instalar y actualizar frameworks como Laravel o Symfony,
-                        así como componentes para generar PDF, procesar pagos con tarjetas, manipular imágenes y mucho más.
-                    </p>
+            @forelse($notes as $note)
+                <div class="card card-small">
+                    <div class="card-body">
+                        <h4>{{ $loop->iteration }} {{ $note }}</h4>
+
+                        <p>
+                            {{ $note }}
+                        </p>
+                    </div>
+
+                    <footer class="card-footer">
+                        <a class="action-link action-edit">
+                            <i class="icon icon-pen"></i>
+                        </a>
+                        <a class="action-link action-delete">
+                            <i class="icon icon-trash"></i>
+                        </a>
+                    </footer>
                 </div>
+            @empty
+                <p> No hay notas. <a href="#">¿Desea agregar una?</a></p>
+            @endforelse
 
-                <footer class="card-footer">
-                    <a class="action-link action-edit">
-                        <i class="icon icon-pen"></i>
-                    </a>
-                    <a class="action-link action-delete">
-                        <i class="icon icon-trash"></i>
-                    </a>
-                </footer>
-            </div>
+
             <div class="card">
                 <div class="card-body">
                     <h4>Instalación de Laravel</h4>
