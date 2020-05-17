@@ -36,7 +36,7 @@ class NoteSeeder extends Seeder
 
         DB::table('notes')->insert([
             'title' => 'Front Controller',
-            'content' => '</p>Front Controller es un patrón de arquitectura donde un controlador maneja todas las solicitudes o peticiones a un sitio web.</p>',
+            'content' => '<p>Front Controller es un patrón de arquitectura donde un controlador maneja todas las solicitudes o peticiones a un sitio web.</p>',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
