@@ -1,16 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
-    $notes = [
-        'Mi primera nota',
-        'Mi segunda nota',
-        'Mi tercera nota',
-        'Mi cuarta nota',
-    ];
-
-    return view('notes')->with('notes', $notes);
+    $notes = DB::table('notes')->get();
+    return view('notes', ['notes' => $notes]);
 })->name('notes');
 
 Route::get('notas/crear', function () {
@@ -22,5 +17,9 @@ Route::get('notas/{id}', function ($id) {
 })->name('note.show');
 
 Route::get('notas/{id}/editar', function ($id) {
-   return "Aquí estará el formulario para editar la nota ".$id;
+    $note = DB::table('notes')
+        ->where('id', $id)
+        ->first();
+    
+    return view('edit-note', ['note' => $note]);
 })->name('notes.edit');
