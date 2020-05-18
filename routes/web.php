@@ -1,10 +1,12 @@
 <?php
 
+use App\Note;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
-    $notes = DB::table('notes')->get();
+    $notes = Note::all();
+
     return view('notes', ['notes' => $notes]);
 })->name('notes');
 
@@ -17,9 +19,7 @@ Route::get('notas/{id}', function ($id) {
 })->name('note.show');
 
 Route::get('notas/{id}/editar', function ($id) {
-    $note = DB::table('notes')
-        ->where('id', $id)
-        ->first();
-    
+    $note = Note::find($id);
+
     return view('edit-note', ['note' => $note]);
 })->name('notes.edit');
