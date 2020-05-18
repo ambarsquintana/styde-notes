@@ -6,36 +6,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rule;
 
 
-Route::get('/', function () {
-    $notes = Note::all();
+Route::get('/', 'NoteController@index')->name('notes');
 
-    return view('notes', ['notes' => $notes]);
-})->name('notes');
+Route::get('notas/crear','NoteController@create')->name('notes.create');
 
-Route::get('notas/crear', function () {
-    return view('add-note');
-})->name('notes.create');
+Route::post('notas','NoteController@store')->name('notes.store');
 
-Route::post('notas', function (Request $request) {
-    $request->validate([
-        'title' => ['required', 'min:3', 'max:30', Rule::unique('notes')],
-        'content' => ['required']
-    ]);
+Route::get('notas/{id}', )->name('note.show');
 
-    Note::create([
-        'title' => $request->input('title'),
-        'content' => $request->input('content'),
-    ]);
-
-    return redirect()->route('notes.create');
-})->name('notes.store');
-
-Route::get('notas/{id}', function ($id) {
-   return "Aquí estará el detalle de la nota ".$id;
-})->name('note.show');
-
-Route::get('notas/{id}/editar', function ($id) {
-    $note = Note::find($id);
-
-    return view('edit-note', ['note' => $note]);
-})->name('notes.edit');
+Route::get('notas/{id}/editar', 'NoteController@edit')->name('notes.edit');
