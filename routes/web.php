@@ -1,8 +1,10 @@
 <?php
 
 use App\Note;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
+
 
 Route::get('/', function () {
     $notes = Note::all();
@@ -15,6 +17,11 @@ Route::get('notas/crear', function () {
 })->name('notes.create');
 
 Route::post('notas', function (Request $request) {
+    $request->validate([
+        'title' => ['required', 'min:3', 'max:30', Rule::unique('notes')],
+        'content' => ['required']
+    ]);
+
     Note::create([
         'title' => $request->input('title'),
         'content' => $request->input('content'),
