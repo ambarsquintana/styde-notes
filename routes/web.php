@@ -1,10 +1,6 @@
 <?php
 
-use App\Note;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\Rule;
-
 
 Route::get('/', 'NoteController@index')->name('notes');
 
