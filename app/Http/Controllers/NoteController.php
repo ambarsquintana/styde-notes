@@ -19,17 +19,14 @@ class NoteController extends Controller
         return view('add-note');
     }
 
-    public function store(Request $request)
+    public function store(Note $note, Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'min:3', 'max:30', Rule::unique('notes')],
             'content' => ['required'],
         ]);
 
-        Note::create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-        ]);
+        $note->create($data);
 
         return redirect()->route('notes.create');
     }
@@ -48,15 +45,12 @@ class NoteController extends Controller
 
     public function update(Note $note, Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'min:3', 'max:30', Rule::unique('notes')->ignore($note)],
             'content' => ['required'],
         ]);
 
-        $note->update([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-        ]);
+        $note->update($data);
 
         return redirect('/');
     }
