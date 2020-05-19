@@ -26,7 +26,7 @@ class NoteController extends Controller
             'content' => ['required'],
         ]);
 
-        $note->create($data);
+        Note::create($data);
 
         return redirect()->route('notes.create');
     }
@@ -51,6 +51,15 @@ class NoteController extends Controller
         ]);
 
         $note->update($data);
+
+        return redirect('/');
+    }
+
+    public function destroy($id)
+    {
+        $note = Note::find($id);
+        
+        $note->delete();
 
         return redirect('/');
     }

@@ -12,6 +12,13 @@
                         <p>
                             {!! $note->content !!} {{-- TODO: Purificar HTML para evitar ataques XSS --}}
                         </p>
+
+                        <form method="POST" action="{{ url("notas/{$note->id}") }}">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit">Eliminar</button>
+                        </form>
                     </div>
 
                     <footer class="card-footer">
