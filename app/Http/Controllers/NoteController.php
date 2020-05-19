@@ -8,18 +8,18 @@ use Illuminate\Validation\Rule;
 
 class NoteController extends Controller
 {
-    public function index () 
+    public function index() 
     {
         $notes = Note::all();
 
         return view('notes', ['notes' => $notes]);
     }
 
-    public function create () {
+    public function create() {
         return view('add-note');
     }
 
-    public function store (Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => ['required', 'min:3', 'max:30', Rule::unique('notes')],
@@ -34,15 +34,30 @@ class NoteController extends Controller
         return redirect()->route('notes.create');
     }
 
-    public function show ($id) 
+    public function show($id) 
     {
         return "Aquí estará el detalle de la nota ".$id;
     }
 
-    public function edit ($id) 
+    public function edit($id) 
     {
         $note = Note::find($id);
     
         return view('edit-note', ['note' => $note]);
+    }
+
+    public function update(Note $note, Request $request)
+    {
+        $request->validate([
+            'title' => ['required', 'min:3', 'max:30', Rule::unique('notes')->ignore($note)],
+            'content' => ['required'],
+        ]);
+
+        $note->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+        ]);
+
+        return redirect('/');
     }
 }
