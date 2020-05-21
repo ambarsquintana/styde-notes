@@ -8,14 +8,15 @@ use Illuminate\Validation\Rule;
 
 class NoteController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $notes = Note::all();
 
         return view('notes', ['notes' => $notes]);
     }
 
-    public function create() {
+    public function create()
+    {
         return view('add-note');
     }
 
@@ -31,15 +32,15 @@ class NoteController extends Controller
         return redirect()->route('notes.create');
     }
 
-    public function show($id) 
+    public function show($id)
     {
         return "Aquí estará el detalle de la nota ".$id;
     }
 
-    public function edit($id) 
+    public function edit($id)
     {
         $note = Note::find($id);
-    
+
         return view('edit-note', ['note' => $note]);
     }
 
@@ -58,7 +59,7 @@ class NoteController extends Controller
     public function destroy($id)
     {
         $note = Note::find($id);
-        
+
         $note->delete();
 
         return redirect('/');
